@@ -1,14 +1,28 @@
 import express from "express";
+import { taskRouter } from "./routes/tasks.route.js";
+import cors from "cors";
+import "dotenv/config";
+import mongoose from "mongoose";
 
+const PORT = 3000;
 const app = express();
 
-app.use("/", async (req, res, next) => {
-  res.write("<h1>Hello Express</h1>");
-  next();
-});
+app.use(cors());
+app.use("/", express.json(), taskRouter);
 
-app.get("/123", async (req, res) => {
-  res.end("<h2>123</h2>");
-});
+const startServer = async () => {
+  try {
+    console.log("Connecting to MongoDB...");
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log("Successfully connected to MongoDB");
 
-app.listen(3005);
+    app.listen(PORT, () => {
+      console.log(`Server is running on ${PORT} port`);
+    });
+  } catch (error) {
+    console.error("Database connection failed", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();

@@ -1,0 +1,29 @@
+.task {
+  position: relative;
+  width: 80%;
+  padding: 6px;
+  max-height: 40px;
+  background-color: #252525;
+  border: 2px solid var(--taskindicatorcolor);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.task__indicator {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--taskindicatorcolor);
+  box-shadow:
+    0 0 5px var(--taskindicatorcolor),
+    0 0 5px var(--taskindicatorcolor);
+}
+
+.task__expanded {
+  max-height: 200px;
+  transition: all 0.5s ease;
+}
